@@ -1,0 +1,59 @@
+<style>
+	.inline-block {
+		display:inline-block;
+	}
+	.card {
+		border:1px solid black;
+		margin-bottom:0.1em;
+		padding:0.5em;
+		background-color:white;
+	}
+	.card-header {
+		border:1px solid black;
+		margin-bottom:0.1em;
+		padding:0.5em;
+		background-color:white;
+	}
+</style>
+<div style="width:1000px;height:600px;" ng-app="JobChecker">
+	<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="popup.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<div id="MainDiv" ng-controller="MainCtrl">
+		
+		<div>
+			<h4>List</h4>
+			<span ng-repeat="(listId, bShowList) in visibleList" class="inline-block">
+				<label><input type="checkbox" ng-model="visibleList[listId]">{{listId}}</label>
+			</span>
+		</div>
+
+		<div>
+			<h4>Member</h4>
+			<span ng-repeat="(memberName, bShowMember) in visibleMember" class="inline-block">
+				<label><input type="checkbox" ng-model="visibleMember[memberName]">{{memberName}}</label>
+			</span>
+		</div>
+		
+		<table style="border:1px solid silver;margin-top:2em;background-color:#fafafa;">
+			<thead>
+				<tr style="vertical-align:top;font-size:0.4em;">
+					<td ng-repeat="item in memberWithJobs track by $index" ng-if="!!visibleMember[item.memberName]" class="card-header">
+							<b>{{item.memberName}}</b>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr style="vertical-align:top;font-size:0.4em;">
+					<td ng-repeat="item in memberWithJobs track by $index" ng-if="!!visibleMember[item.memberName]">
+							<div class="card" ng-repeat="job in item.jobList" ng-if="!!visibleList[job.listId]">
+								{{job.cardTitle}}
+							</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>

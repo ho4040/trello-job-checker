@@ -1,0 +1,25 @@
+{
+  "name": "Job checker",
+  "description" : "Trello card check by each user",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  
+  "manifest_version": 2,
+  "browser_action":{
+    "default_title": "show jobs",
+    "default_icon": "ico.png",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [{
+    "matches": ["*://trello.com/*"],
+    "js": [
+      "jquery.min.js",
+      "content.js"
+    ]
+  }],
+  "web_accessible_resources":[
+    "*"
+  ]
+}
